@@ -78,14 +78,6 @@ jobs:
         resource-group: mslearn-gh-pipelines-5060
         # AKS Cluster Name
         cluster-name: contoso-video
-        #creds: ${{ secrets.AZURE_CREDENTIALS }}
-        # AKS Cluster Subscription
-        #subscription: # optional
-        # Get cluster admin credentials. Values: true or false
-        #admin: # optional
-        # Enables kubelogin for non-admin user scenario. Values: true or false
-        #use-kubelogin: ${{ secrets.AZURE_CREDENTIALS }} # optional
-
 
     - name: Run Helm Deploy
       run: |
@@ -98,5 +90,6 @@ jobs:
           contoso-website \
           ./kubernetes/contoso-website \
           --set image.repository=${{ secrets.ACR_NAME }} \
-          --set dns.name=${{ secrets.DNS_NAME }} \
-          --set image.tag=${GITHUB_REF##*/}
+          --set image.tag=${GITHUB_REF##*/} \
+          --set dns.name=${{ secrets.DNS_NAME }} 
+
